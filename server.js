@@ -7,10 +7,10 @@ var cors = require('cors')
 // DB Config
 require('dotenv').config()
 const URI = process.env.DB_CONNECT
-const localURI = 'mongodb://localhost:27017/main'
 
 // Routes
-var indexRouter = require('./routes')
+var indexRouter = require('./routes/index')
+var postsRouter = require('./routes/posts')
 
 // Init app
 var app = express()
@@ -22,6 +22,7 @@ app.use(express.json())
 
 // Api Routes
 app.use('/', indexRouter)
+app.use('/posts', postsRouter)
 
 // Handle 404 Error
 app.use( (req, res, next) => {

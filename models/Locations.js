@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const LocationSchema = mongoose.Schema({
-    street: {
+    street_address: {
         type: String,
         required: true
     },
@@ -13,10 +13,10 @@ const LocationSchema = mongoose.Schema({
         type: String,
         required: false
     },
-    other: {
+    state: {
         type: String,
-        required: false
+        required: true
     }
 })
 
-module.exports = mongoose.model('Location', LocationSchema)
+module.exports = mongoose.model('Locations', LocationSchema)
