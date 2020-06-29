@@ -53,13 +53,26 @@ router.post('/', (req, res) => {
             res.json({ message: 'Error adding address.', error: err})
         })
     }
+    // Add Image
+    var image = new Image
+    image.img.data = fs.readFileSync(imgPath);
+    image.img.contentType = 'image/jpg'
+    image.save()
+    .then( () => {
+        res.json({ message: 'Image saved.' })
+    })
+    .catch( err => {
+        res.json({ message: err.message, error: err })
+    })
 
     // Add Post with found/created location
     const newPost = new Post({
         title: req.body.title,
         content: req.body.content,
-        location: address.id
+        location: address.id,
+        images: image.id
     })
+    
     newPost.save()
     .then( post => {
         res.json({ message: 'Post saved.', data: post })

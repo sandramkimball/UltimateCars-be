@@ -17,7 +17,12 @@ const PostSchema = mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: 'Location',
         required: false
-    }
+    },
+    images: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Images',
+        required: false
+    }]
 })
 
 module.exports = mongoose.model('Posts', PostSchema)

@@ -11,6 +11,7 @@ const URI = process.env.DB_CONNECT
 // Routes
 var indexRouter = require('./routes/index')
 var postsRouter = require('./routes/posts')
+var imagesRouter = require('./routes/images')
 
 // Init app
 var app = express()
@@ -23,6 +24,7 @@ app.use(express.json())
 // Api Routes
 app.use('/', indexRouter)
 app.use('/posts', postsRouter)
+app.use('/images', imagesRouter)
 
 // Handle 404 Error
 app.use( (req, res, next) => {
