@@ -21,6 +21,14 @@ const VehicleSchema = mongoose.Schema({
         type: String,
         required: true,
     },
+    transmission: {
+        type: String,
+        required: true,
+    },
+    fuel: {
+        type: String,
+        required: true,
+    },
     color: {
         type: String,
         required: true,
@@ -40,6 +48,11 @@ const VehicleSchema = mongoose.Schema({
     listingCreated: {
         type: Date,
         default: Date.now
+    },
+    vin: {
+        type: String,
+        unique: true,
+        required: true,
     },
     description: {
         type: String,

@@ -1,0 +1,34 @@
+[
+    {
+        "make": "Dodge",
+        "model": "Ram 1500",
+        "year": 2004,
+        "body": "truck",
+        "engine": "6 Cyl",
+        "drive": "RWD",
+        "transmission": "automatic",
+        "miles": 30000,
+        "fuel": "gasoline",
+        "color": "blue",
+        "price": 12000,
+        "description": "New brakes, shocks, transmission, front fender, left headlight.",
+        "vin": "ASD123",
+        "images": []
+    },
+    {
+        "make": "Mazda",
+        "model": "Mazda3 i Sport",
+        "year": 2010,
+        "body": "sedan",
+        "engine": "4 Cyl 2.0L",
+        "drive": "FWD",
+        "transmission": "automatic",
+        "miles": 120000,
+        "fuel": "gasoline",
+        "color": "black",
+        "price": 8000,
+        "description": "Clean, great mpg, fast with fast tires. Captain chairs.",
+        "vin": "QWE456",
+        "images": []
+    }
+]
