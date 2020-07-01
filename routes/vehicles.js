@@ -1,28 +1,28 @@
 var express = require('express');
 var router = express.Router();
 
-var Post = require('../models/Posts');
+var Vehicle = require('../models/Vehicles');
 var Location = require('../models/Locations');
 
 // GET ALL
 router.get('/', (req, res) => {
-    Post.find()
-    .then(posts => {
-        res.json({data: posts})
+    Vehicle.find()
+    .then(vehicles => {
+        res.json({data: vehicles})
     })
     .catch( err => {
-        res.json({message: 'Error retrieving posts.', error: err})
+        res.json({message: 'Error retrieving vehicles.', error: err})
     })
 })
 
 // GET ONE
 router.get('/', (req, res) => {
-    Post.findById(req.body.id)
-    .then(post => {
-        res.json({data: post})
+    Vehicle.findById(req.body.id)
+    .then(vehicle => {
+        res.json({data: vehicle})
     })
     .catch( err => {
-        res.json({message: 'Post not found.', data: err})
+        res.json({message: 'Vehicle not found.', data: err})
     })
 })
 
@@ -65,29 +65,29 @@ router.post('/', (req, res) => {
         res.json({ message: err.message, error: err })
     })
 
-    // Add Post with found/created location
-    const newPost = new Post({
+    // Add Vehicle with found/created location
+    const newVehicle = new Vehicle({
         title: req.body.title,
         content: req.body.content,
         location: address.id,
         images: image.id
     })
     
-    newPost.save()
-    .then( post => {
-        res.json({ message: 'Post saved.', data: post })
+    newVehicle.save()
+    .then( vehicle => {
+        res.json({ message: 'Vehicle saved.', data: vehicle })
     })
     .catch( err => {
-        res.json({ message: 'Error creating post.', error: err })
+        res.json({ message: 'Error creating vehicle.', error: err })
     })
 })
 
 // PUT
 router.put('/:id', (req, res) => {
     var id = req.params.id
-    Post.findByIdAndUpdate({ id })
-    .then( post => {
-        res.json({ message: 'Post updated', data: post })
+    Vehicle.findByIdAndUpdate({ id })
+    .then( vehicle => {
+        res.json({ message: 'Vehicle updated', data: vehicle })
     })
     .catch( err => {
         res.json({ message: 'Unable to update.', error: err })
@@ -97,12 +97,12 @@ router.put('/:id', (req, res) => {
 // DELETE
 router.delete('/:id', (req, res) => {
     var id = req.params.id
-    Post.findByIdAndDelete({ id })
+    Vehicle.findByIdAndDelete({ id })
     .then( () => {
-        res.json({ message: 'Post deleted.' })
+        res.json({ message: 'Vehicle deleted.' })
     })
     .catch ( err => {
-        res.json({ message: 'Error deleting post.', error: err })
+        res.json({ message: 'Error deleting vehicle.', error: err })
     })
 })
 
