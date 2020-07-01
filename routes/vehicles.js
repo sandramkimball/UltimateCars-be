@@ -4,7 +4,7 @@ var router = express.Router();
 var Vehicle = require('../models/Vehicles');
 var Location = require('../models/Locations');
 
-// GET ALL
+// GET ALL CARS
 router.get('/', (req, res) => {
     Vehicle.find()
     .then(vehicles => {
@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
     })
 })
 
-// GET ONE
+// GET ONE CAR
 router.get('/', (req, res) => {
     Vehicle.findById(req.body.id)
     .then(vehicle => {
@@ -26,33 +26,8 @@ router.get('/', (req, res) => {
     })
 })
 
-// POST
+// POST A NEW CAR
 router.post('/', (req, res) => {
-    // Location
-    const address = req.body.street_address
-    var location
-    // Check if location exists
-    if(Location.find(address) === true) {
-        Location.find(address)
-        .then(result => location = result )
-    }
-    // Create new location
-    else {
-        location = new Location({
-            street_address: address,
-            city: req.body.city,
-            neighborhood: req.body.neighborhood,
-            state: 'Ca'
-        })
-
-        location.save()
-        .then( location => {
-            res.json({ message: 'New address saved.', data: location})
-        })
-        .catch(err => {
-            res.json({ message: 'Error adding address.', error: err})
-        })
-    }
     // Add Image
     var image = new Image
     image.img.data = fs.readFileSync(imgPath);
@@ -65,12 +40,12 @@ router.post('/', (req, res) => {
         res.json({ message: err.message, error: err })
     })
 
-    // Add Vehicle with found/created location
+    // Add Vehicle 
     const newVehicle = new Vehicle({
         title: req.body.title,
         content: req.body.content,
         location: address.id,
-        images: image.id
+        images: image.id // need to modify to take in a "gallery" of images, not just one
     })
     
     newVehicle.save()
@@ -82,7 +57,7 @@ router.post('/', (req, res) => {
     })
 })
 
-// PUT
+// PUT UPDATE A CAR
 router.put('/:id', (req, res) => {
     var id = req.params.id
     Vehicle.findByIdAndUpdate({ id })
@@ -94,7 +69,7 @@ router.put('/:id', (req, res) => {
     })
 })
 
-// DELETE
+// DELETE A CAR
 router.delete('/:id', (req, res) => {
     var id = req.params.id
     Vehicle.findByIdAndDelete({ id })
