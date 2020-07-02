@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/sandramkimball/mobilehair-be/issues"
   },
-  "homepage": "https://github.com/sandramkimball/mobilehair-be#readme"
+  "homepage": "https://github.com/sandramkimball/mobilehair-be#readme",
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1"
+  }
 }

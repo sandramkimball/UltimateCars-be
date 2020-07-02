@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 var Vehicle = require('../models/Vehicles');
-var Location = require('../models/Locations');
 
 // GET ALL CARS
 router.get('/', (req, res) => {
@@ -16,7 +15,7 @@ router.get('/', (req, res) => {
 })
 
 // GET ONE CAR
-router.get('/', (req, res) => {
+router.get('/:id', (req, res) => {
     Vehicle.findById(req.body.id)
     .then(vehicle => {
         res.json({data: vehicle})

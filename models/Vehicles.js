@@ -58,11 +58,20 @@ const VehicleSchema = mongoose.Schema({
         type: String,
         required: false,
     },
+    tags: [{
+        type: String,
+        required: false,
+    }],
     images: [{
         type: Schema.Types.ObjectId,
         ref: 'Images',
         required: false
-    }]
+    }],
+    seller: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    }
 })
 
 module.exports = mongoose.model('Vehicles', VehicleSchema)
