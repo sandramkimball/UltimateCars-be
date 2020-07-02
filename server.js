@@ -4,17 +4,19 @@ var express = require('express')
 var logger = require('morgan')
 var cors = require('cors')
 
+// Init app
+var app = express()
+
 // DB Config
 require('dotenv').config()
 const URI = process.env.DB_CONNECT
 
 // Routes
 var indexRouter = require('./routes/index')
+var authRouter = require('./routes/auth')
 var vehiclesRouter = require('./routes/vehicles')
+var userRouter = require('./routes/user')
 var imagesRouter = require('./routes/images')
-
-// Init app
-var app = express()
 
 // Add Middleware
 app.use(cors())
@@ -23,6 +25,8 @@ app.use(express.json())
 
 // Api Routes
 app.use('/', indexRouter)
+app.use('/auth', authRouter)
+app.use('/user', userRouter)
 app.use('/vehicles', vehiclesRouter)
 app.use('/images', imagesRouter)
 
