@@ -1,11 +1,10 @@
 var express = require('express')
 var router = express.Router()
-var bcrypt = require('bcryptjs')
+var bcrypt = require('bcrypt')
 var jwt = require('jsonwebtoken')
 var User = require('../models/User')
 require('dotenv')
 
-// LOGIN - GET A USER
 function getJwtToken(user){
     const payload = { 
         email: user.email,
@@ -20,6 +19,8 @@ function getJwtToken(user){
 
     return jwt.sign(payload, secret, options)
 }
+
+// LOGIN - GET A USER
 router.post('/login/:id', (req, res) => {
     let { email, password } = req.body;
     
@@ -27,7 +28,7 @@ router.post('/login/:id', (req, res) => {
         return res.json({status: 401, message: 'Missing email or password.'})
     }
 
-    User.findById({ email })
+    User.findBy({ email })
     .then(user => {
         if (user && bcrypt.compareSync(password, user.password)){
             const token = getJwtToken(user);

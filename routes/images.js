@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 
-var Image = require('./models/images')
+var Image = require('../models/Images')
 
 // GET
 router.get('/', (req, res) => {

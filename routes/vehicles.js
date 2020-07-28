@@ -40,14 +40,9 @@ router.post('/', (req, res) => {
     })
 
     // Add Vehicle 
-    const newVehicle = new Vehicle({
-        title: req.body.title,
-        content: req.body.content,
-        location: address.id,
-        images: image.id // need to modify to take in a "gallery" of images, not just one
-    })
+    let newVehicle = req.body
     
-    newVehicle.save()
+    Vehicle.add(newVehicle)
     .then( vehicle => {
         res.json({ message: 'Vehicle saved.', data: vehicle })
     })

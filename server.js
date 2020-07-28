@@ -11,17 +11,17 @@ var app = express()
 require('dotenv').config()
 const URI = process.env.DB_CONNECT
 
+// Add Middleware
+app.use(cors())
+app.use(logger('dev'))
+app.use(express.json())
+
 // Routes
 var indexRouter = require('./routes/index')
 var authRouter = require('./routes/auth')
 var vehiclesRouter = require('./routes/vehicles')
 var userRouter = require('./routes/user')
 var imagesRouter = require('./routes/images')
-
-// Add Middleware
-app.use(cors())
-app.use(logger('dev'))
-app.use(express.json())
 
 // Api Routes
 app.use('/', indexRouter)
