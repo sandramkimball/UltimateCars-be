@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 // GET ONE CAR
 router.get('/:id', (req, res) => {
-    Vehicle.findById(req.body.id)
+    Vehicle.findById(req.body._id)
     .then(vehicle => {
         res.json({data: vehicle})
     })
