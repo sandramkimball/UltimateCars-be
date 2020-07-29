@@ -58,3 +58,5 @@ router.post('/register', (req, res) => {
         res.json({ message: 'Failed to create user.', error: err})
     })
 })
+
+module.exports = router;

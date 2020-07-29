@@ -39,3 +39,5 @@ router.delete('/:id', (req, res) => {
         res.json({ message: 'Error deleting image.', error: err })
     })
 })
+
+module.exports = router;
