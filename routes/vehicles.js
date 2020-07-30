@@ -28,16 +28,16 @@ router.get('/:id', (req, res) => {
 // POST A NEW CAR
 router.post('/', (req, res) => {
     // Add Image
-    var image = new Image
-    image.img.data = fs.readFileSync(imgPath);
-    image.img.contentType = 'image/jpg'
-    image.save()
-    .then( () => {
-        res.json({ message: 'Image saved.' })
-    })
-    .catch( err => {
-        res.json({ message: err.message, error: err })
-    })
+    // var image = new Image
+    // image.img.data = fs.readFileSync(imgPath);
+    // image.img.contentType = 'image/jpg'
+    // image.save()
+    // .then( () => {
+    //     res.json({ message: 'Image saved.' })
+    // })
+    // .catch( err => {
+    //     res.json({ message: err.message, error: err })
+    // })
 
     // Add Vehicle 
     let newVehicle = req.body
