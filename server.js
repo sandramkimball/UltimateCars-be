@@ -40,7 +40,7 @@ app.use( (err,req,res, next) => {
 
     // render error pg
     res.status(err.status || 500)
-    res.render('error')
+    res.json({error: 'error'})
 })
 
 // DB Connect
