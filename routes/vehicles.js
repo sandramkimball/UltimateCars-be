@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
 
 // GET ONE CAR
 router.get('/:id', (req, res) => {
-    Vehicle.findById(req.body._id)
+    Vehicle.find({id: req.body._id})
     .then(vehicle => {
         res.json({data: vehicle})
     })
@@ -43,8 +43,8 @@ router.post('/', (req, res) => {
     let newVehicle = req.body
     
     Vehicle.add(newVehicle)
-    .then( vehicle => {
-        res.json({ message: 'Vehicle saved.', data: vehicle })
+    .then( () => {
+        res.json({ message: 'Vehicle saved.', data: newVehicle })
     })
     .catch( err => {
         res.json({ message: 'Error creating vehicle.', error: err })
