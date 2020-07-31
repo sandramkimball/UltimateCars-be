@@ -12,35 +12,35 @@ const VehicleSchema = mongoose.Schema({
     },
     body: {
         type: String,
-        required: true
+        required: false
     },
     drive: {
         type: String,
-        required: true
+        required: false
     },
     isNew: {
         type: Boolean,
-        required: true
+        required: false
     },
     engine: {
         type: String,
-        required: true,
+        required: false,
     },
     transmission: {
         type: String,
-        required: true,
+        required: false,
     },
     fuel: {
         type: String,
-        required: true,
+        required: false,
     },
     color: {
         type: String,
-        required: true,
+        required: false,
     },
     year: {
         type: Number,
-        required: true,
+        required: false,
     },
     miles: {
         type: Number,
@@ -48,7 +48,7 @@ const VehicleSchema = mongoose.Schema({
     },
     price: {
         type: Number,
-        required: true,
+        required: false,
     },
     listingCreated: {
         type: Date,
@@ -56,8 +56,8 @@ const VehicleSchema = mongoose.Schema({
     },
     vin: {
         type: String,
-        unique: true,
-        required: true,
+        unique: false,
+        required: false,
     },
     description: {
         type: String,
