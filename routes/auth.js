@@ -21,7 +21,7 @@ function getJwtToken(user){
 }
 
 // LOGIN - GET A USER
-router.post('/login/:id', (req, res) => {
+router.post('/login', (req, res) => {
     let { email, password } = req.body;
     
     if(!email || !password){

@@ -7,9 +7,8 @@ require('dotenv')
 
 // GET A USER
 router.get('/:id', restricted, (req, res) => {
-    id = req.params.id
 
-    User.findById(id)
+    User.find({email: req.body.email})
     .then(user => {
         res.json(user)
     })
