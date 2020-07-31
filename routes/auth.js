@@ -48,7 +48,13 @@ router.post('/login', (req, res) => {
 
 // REGISTER -A NEW USER
 router.post('/register', (req, res) => {
-    res.json({message: 'chimichanga car'})
+    
+    if( User.find({email: req.body.email}) ){
+        res.json({ message: 'User with that email already exists.' })
+    } else {
+        res.json({ message: 'Email is available. Have a taco.'})
+    }
+
     let newUser = req.body
 
     // grab and hash password
@@ -65,7 +71,12 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/registration', (req, res) => {
-    res.json({message: 'taco car'})
+    if( User.find({email: req.body.email}) ){
+        res.json({ message: 'User with that email already exists.' })
+    } else {
+        res.json({ message: 'Email is available. Have a taco.'})
+    }
+
     // Grab and hash password
     const hash = bcrypt.hashSync(req.body.password, 10)
 
