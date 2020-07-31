@@ -67,28 +67,37 @@ router.post('/register', (req, res) => {
 router.post('/registration', (req, res) => {
     if( User.find({ email: req.body.email }) ){
         res.json({ message: 'User with that email already exists.' })
-    } 
+    }  else {
 
-    // Grab and hash password
-    const hash = bcrypt.hashSync(req.body.password, 10)
+        // Grab and hash password
+        const password = await req.body.password;
+        const hash = await bcrypt.hashSync(req.body.password, 10)
 
-    // Create new user object.
-    const newUser = new User({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: hash,
-        city: req.body.city,
-        state: req.body.state,
-    })
+        // const salt = await bcrypt.genSaltSync(10);
+        // const password = await req.body.password;
 
-    newUser.save()
-    .then( saved => {
-        res.json({ message: 'New user created.', data: saved })
-    })
-    .catch( err => {
-        res.json({ message: 'Failed to create user.', error: err})
-    })     
+        // const salt = await bcrypt.genSalt(10);
+        // const hash = await bcrypt.hash(req.body.password, salt);
+
+        // Create new user object.
+        const newUser = new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: hash,
+            city: req.body.city,
+            state: req.body.state,
+        })
+
+        newUser.save()
+        .then( saved => {
+            res.json({ message: 'New user created.', data: saved })
+        })
+        .catch( err => {
+            res.json({ message: 'Failed to create user.', error: err})
+        })    
+        
+    }
 })
 
 
