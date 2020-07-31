@@ -47,6 +47,8 @@ router.post('/', (req, res) => {
         tags: req.body.tags,
         features: req.body.features,
     })
+    console.log('req:', req)
+    console.log('newCar:', newCar)
     
     // Add new vehicle.
     newCar.save()
