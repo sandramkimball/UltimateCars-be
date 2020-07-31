@@ -45,49 +45,48 @@ router.post('/login', (req, res) => {
 
 // REGISTER NEW USER
 router.post('/register', async (req, res) => {
-    let newUser = req.body
-
-    // if( User.find({ email: newUser.email }) ){
-    //     res.json({ message: 'User with that email already exists.' })
-    // } 
+    // Create newUser and hash password
+    let newUser = req.body 
+    newUser.password = await bcrypt.hashSync(newUser.password, 10)
 
     try{
-        // grab and hash password
-        const hash = await bcrypt.hashSync(newUser.password, 10)
-        newUser.password = hash
-
         User.add(newUser)
         .then( saved => {
-            res.json({ message: 'New user created.', data: saved })
+            res.json({ message: 'New user added.', data: saved })
         })
         .catch( err => {
-            res.json({ message: 'Failed to add user to table.', error: err})
+            res.json({ message: 'Failed to add new user.', error: err})
         })
     }
-    catch {
-        res.json({ message: 'Issue with creating user, password hash or other.'})
+    catch (err){
+        res.json({ message: 'I don\'t even know.', error: err})
     }
 })
 
-router.post('/registration', (req, res) => {
+router.post('/registration', async (req, res) => {
     // Create newUser object:
+    let hash = await bcrypt.hashSync(req.body.password, 10)
     const newUser =  new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: bcrypt.hashSync(req.body.password, 10),
+        password: hash,
         city: req.body.city,
         state: req.body.state,
     })
 
-    // Save newUser
-    newUser.save()
-    .then( saved => {
-        res.json({ message: 'New user created.', data: saved })
-    })
-    .catch( err => {
-        res.json({ message: 'Failed to save user.', error: err})
-    })  
+    try {
+        // Save newUser
+        newUser.save()
+        .then( saved => {
+            res.json({ message: 'New user created.', data: saved })
+        })
+        .catch( err => {
+            res.json({ message: 'Failed to save user.', error: err})
+        })  
+    } catch (err){
+        res.json({ message: 'I don\'t even know.', error: err})
+    }
 })
 
 
