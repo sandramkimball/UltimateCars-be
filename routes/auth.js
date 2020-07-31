@@ -47,9 +47,9 @@ router.post('/login', (req, res) => {
 router.post('/register', async (req, res) => {
     let newUser = req.body
 
-    if( User.find({ email: newUser.email }) ){
-        res.json({ message: 'User with that email already exists.' })
-    } 
+    // if( User.find({ email: newUser.email }) ){
+    //     res.json({ message: 'User with that email already exists.' })
+    // } 
 
     try{
         // grab and hash password
@@ -70,28 +70,24 @@ router.post('/register', async (req, res) => {
 })
 
 router.post('/registration', (req, res) => {
-    try{
-        // Create newUser object:
-        const newUser =  new User({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password: bcrypt.hashSync(req.body.password, 10),
-            city: req.body.city,
-            state: req.body.state,
-        })
+    // Create newUser object:
+    const newUser =  new User({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: bcrypt.hashSync(req.body.password, 10),
+        city: req.body.city,
+        state: req.body.state,
+    })
 
-        // Save newUser
-        newUser.save()
-        .then( saved => {
-            res.json({ message: 'New user created.', data: saved })
-        })
-        .catch( err => {
-            res.json({ message: 'Failed to save user.', error: err})
-        })    
-    } catch {
-        res.json({ message: 'Unable to create user or hash password.', error: err})
-    }
+    // Save newUser
+    newUser.save()
+    .then( saved => {
+        res.json({ message: 'New user created.', data: saved })
+    })
+    .catch( err => {
+        res.json({ message: 'Failed to save user.', error: err})
+    })  
 })
 
 
