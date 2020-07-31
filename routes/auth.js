@@ -68,6 +68,12 @@ router.post('/registration', async (req, res) => {
     try {
         // Create newUser object:
         let hash = await bcrypt.hashSync(req.body.password, 10)
+    } catch {
+        res.json({message: 'Could not hash password.'})
+    }
+
+    try{
+        // Create newUser
         const newUser =  new User({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -80,7 +86,7 @@ router.post('/registration', async (req, res) => {
         // Save newUser
         newUser.save()
         .then( saved => {
-            res.json({ message: 'New user created.', data: saved })
+            res.json({ message: 'New user saved.', data: saved })
         })
         .catch( err => {
             res.json({ message: 'Failed to save user.', error: err})
