@@ -12,6 +12,7 @@ const URI = process.env.DB_CONNECT
 var indexRouter = require('./routes/index')
 var authRouter = require('./routes/auth')
 var vehiclesRouter = require('./routes/vehicles')
+var userRouter = require('./routes/user')
 var imagesRouter = require('./routes/images')
 
 // Init app
@@ -25,6 +26,7 @@ app.use(express.json())
 // Api Routes
 app.use('/', indexRouter)
 app.use('/auth', authRouter)
+app.use('/user', userRouter)
 app.use('/vehicles', vehiclesRouter)
 app.use('/images', imagesRouter)
 

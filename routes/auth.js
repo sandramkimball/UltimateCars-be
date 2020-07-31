@@ -20,6 +20,10 @@ function getJwtToken(user){
     return jwt.sign(payload, secret, options)
 }
 
+router.get('/test', (req, res) => {
+    res.json({message: 'burrito car'})
+})
+
 // LOGIN - GET A USER
 router.post('/login', (req, res) => {
     let { email, password } = req.body;
@@ -62,7 +66,6 @@ router.post('/register', (req, res) => {
 router.post('/registration', (req, res) => {
     // Grab and hash password
     const hash = bcrypt.hashSync(req.body.password, 10)
-    newUser.password = hash
 
     // Create new user object.
     const newUser = new User({
@@ -72,7 +75,6 @@ router.post('/registration', (req, res) => {
         password: hash,
         city: req.body.city,
         state: req.body.state,
-
     })
 
     newUser.save()

@@ -47,8 +47,6 @@ router.post('/', (req, res) => {
         tags: req.body.tags,
         features: req.body.features,
     })
-    console.log('req:', req)
-    console.log('newCar:', newCar)
     
     // Add new vehicle.
     newCar.save()
@@ -90,9 +88,9 @@ router.put('/:id', (req, res) => {
 
 // DELETE A CAR
 router.delete('/:id', (req, res) => {
-    var id = req.params.id
-    Vehicle.findByIdAndDelete({ id })
-    .then( () => {
+    var carId = req.params._id
+    Vehicle.find({id: carId })
+    .delete( () => {
         res.json({ message: 'Vehicle deleted.' })
     })
     .catch ( err => {

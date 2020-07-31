@@ -5,6 +5,17 @@ var restricted = require('../middleware/restricted')
 require('dotenv')
 
 
+// GET ALL USERS
+router.get('/', (req, res) => {
+    User.find()
+    .then(users => {
+        res.json(users)
+    })
+    .catch( err=> {
+        res.json({message: 'Users not found.', error: err})
+    })
+})
+
 // GET A USER
 router.get('/:id', restricted, (req, res) => {
 
