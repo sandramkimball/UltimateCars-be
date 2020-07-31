@@ -47,7 +47,7 @@ router.post('/login', (req, res) => {
 router.post('/register', (req, res) => {
     let newUser = req.body
 
-    if( User.findBy({ email: newUser.email }) ){
+    if( User.find({ email: newUser.email }) ){
         res.json({ message: 'User with that email already exists.' })
     } 
 
@@ -65,7 +65,7 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/registration', (req, res) => {
-    if( User.findBy({ email: req.body.email }) ){
+    if( User.find({ email: req.body.email }) ){
         res.json({ message: 'User with that email already exists.' })
     } 
 
