@@ -65,28 +65,23 @@ router.post('/register', async (req, res) => {
         })
     }
     catch {
-        res.json({ message: 'Issue with creating user, password hash or other.', error: err})
+        res.json({ message: 'Issue with creating user, password hash or other.'})
     }
 })
 
-router.post('/registration', async (req, res) => {
+router.post('/registration', (req, res) => {
     try{
-        // Grab and hash password
-        const hash = await bcrypt.hashSync(req.body.password, 10)
-
-        // const salt = await bcrypt.genSalt(10);
-        // const hash = await bcrypt.hash(req.body.password, salt);
-
-        // Create new user object.
-        const newUser = await new User({
+        // Create newUser object:
+        const newUser =  new User({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            password: hash,
+            password: bcrypt.hashSync(req.body.password, 10),
             city: req.body.city,
             state: req.body.state,
         })
 
+        // Save newUser
         newUser.save()
         .then( saved => {
             res.json({ message: 'New user created.', data: saved })
