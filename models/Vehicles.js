@@ -63,7 +63,7 @@ const VehicleSchema = mongoose.Schema({
         type: String,
         required: false,
     },
-    image_profile: {
+    profile_img: {
         type: String,
         required: false,
     },

@@ -43,7 +43,7 @@ router.post('/', (req, res) => {
         price: req.body.price,
         vin: req.body.vin,
         description: req.body.description,
-        image_profile: req.body.image_profile,
+        profile_img: req.body.profile_img,
         tags: req.body.tags,
         features: req.body.features,
     })

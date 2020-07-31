@@ -1,43 +1,5 @@
 [
-    {
-        "make": "Dodge",
-        "model": "SRT Viper GTS",
-        "year": 2013,
-        "body": "coupe",
-        "engine": "10 Cyl 8.4L",
-        "drive": "RWD",
-        "transmission": "manual",
-        "miles": 5200,
-        "fuel": "gasoline",
-        "color": "blue",
-        "isNew": false,
-        "price": 98000,
-        "description": "New brakes, shocks, transmission, front fender, left headlight.",
-        "vin": "A77SD123",
-        "images": [
-            "http://cdn-ds.com/stock/2013-Dodge-SRT-Viper-GTS-Tomball-TX/seo/IGNITE4662-1C3ADEBZ5DV300096/sz_125189/w_1020/h_780/1C3ADEBZ5DV300096_9389e2c24e02b120.jpg"
-        ],
-        "tags": ["sport"]
-    },{
-        "make": "Dodge",
-        "model": "Ram 1500",
-        "year": 1941,
-        "body": "truck",
-        "engine": "6 Cyl",
-        "drive": "RWD",
-        "transmission": "3 Speed Automatic",
-        "miles": 415,
-        "fuel": "gasoline",
-        "color": "yellow",
-        "isNew": false,
-        "price": 32000,
-        "description": "Completely refurbished.",
-        "vin": "A77SD123",
-        "images": [
-            "https://cdn.dealeraccelerate.com/streetside/2/27173/1523960/790x1024/1940-dodge-1-1-2-ton-pickup-gasser.jpg"
-        ],
-        "tags": ["classic", "collector"]
-    },
+    
     {
         "make": "Mazda",
         "model": "Mazda3 i Sport",
@@ -75,65 +37,5 @@
         "vin": "WE5FRG5",
         "images": ["http://st.motortrend.com/uploads/sites/5/2017/04/2018-BMW-4-Series-Coupe-front-three-quarter-in-motion-04.jpg"],
         "tags": ["Sport", "modern", "luxury"]
-    },
-    {
-        "make": "Bugatti",
-        "model": "Veyron",
-        "year": 2020,
-        "body": "Coupe",
-        "engine": "W16",
-        "drive": "AWD",
-        "transmission": "7-Speed Automatic",
-        "miles": 0,
-        "fuel": "gasoline",
-        "color": "silver",
-        "isNew": true,
-        "price": 1300005,
-        "description": "Luxury optimized",
-        "vin": "GERF55E5FA5DF",
-        "images": [
-            "http://1.bp.blogspot.com/-WGjEgql_h6Q/U4YrzJnZH3I/AAAAAAAAARE/VQ7qrO_gZs8/s1600/2015+bugatti+veyron+14.jpg"
-        ],
-        "tags": ["classic", "sport"]
-    },
-    {
-        "make": "Ferrari",
-        "model": "Veyron",
-        "year": 1985,
-        "body": "Coupe",
-        "engine": "V12",
-        "drive": "AWD",
-        "transmission": "Manual",
-        "miles": 1700,
-        "fuel": "gasoline",
-        "color": "red",
-        "isNew": false,
-        "price": 120000,
-        "description": "",
-        "vin": "000000",
-        "images": [
-            "http://cdn.static.specialtysales.com/uploads/gallery/vehicle/11279/1985_ferrari_308_gts_quattrovalvole_2_door_coupe_7c39090595.jpg"
-        ],
-        "tags": ["Sport", "classic"]
-    },
-    {
-        "make": "Ferrari",
-        "model": "GTC4Lusso",
-        "year": 2019,
-        "body": "Coupe",
-        "engine": "V12",
-        "drive": "AWD",
-        "transmission": "Manual",
-        "miles": 1700,
-        "fuel": "gasoline",
-        "color": "yellow",
-        "isNew": false,
-        "price": 256000,
-        "description": "",
-        "vin": "000000",
-        "images": [
-            "http://cdn.static.specialtysales.com/uploads/gallery/vehicle/11279/1985_ferrari_308_gts_quattrovalvole_2_door_coupe_7c39090595.jpg"
-        ],
-        "tags": ["Sport", "classic"]
     }
 ]
