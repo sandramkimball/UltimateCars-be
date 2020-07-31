@@ -31,18 +31,18 @@ app.use('/vehicles', vehiclesRouter)
 app.use('/images', imagesRouter)
 
 // Handle 404 Error
-app.use( (req, res, next) => {
-    next(createError(404))
-});
+// app.use( (req, res, next) => {
+//     next(createError(404))
+// });
 
-app.use( (err, req, res, next) => {
-    // only in development
-    res.locals.message = err.message
-    res.locals.error = req.app.get('env') === 'development' ? error : {}
+// app.use( (err, req, res, next) => {
+//     // only in development
+//     res.locals.message = err.message
+//     res.locals.error = req.app.get('env') === 'development' ? error : {}
 
-    // render error pg
-    res.json({status: err.status || 500, error: err})
-})
+//     // render error pg
+//     res.json({status: err.status || 500, error: err})
+// })
 
 // DB Connect
 mongoose.connect(URI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}, ()=> console.log('  ---MONGOOSE: connected') )
