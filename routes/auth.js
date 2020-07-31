@@ -21,11 +21,11 @@ function getJwtToken(user){
 }
 
 
-// LOGIN - GET A USER
+// LOGIN - GET USER
 router.post('/login', (req, res) => {
     let { email, password } = req.body;
     
-    if(!email || !password){
+    if(!req.body.email || !req.body.password){
         return res.json({status: 401, message: 'Missing email or password.'})
     }
 
@@ -43,16 +43,13 @@ router.post('/login', (req, res) => {
     })
 })
 
-// REGISTER -A NEW USER
+// REGISTER NEW USER
 router.post('/register', (req, res) => {
-    
-    // if( User.findBy({email: req.body.email}) ){
-    //     res.json({ message: 'User with that email already exists.' })
-    // } else {
-    //     res.json({ message: 'Email is available. Have a taco.'})
-    // }
-
     let newUser = req.body
+
+    if( User.findBy({ email: newUser.email }) ){
+        res.json({ message: 'User with that email already exists.' })
+    } 
 
     // grab and hash password
     const hash = bcrypt.hashSync(newUser.password, 10)
@@ -68,11 +65,9 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/registration', (req, res) => {
-    // if( User.findBy({email: req.body.email}) ){
-    //     res.json({ message: 'User with that email already exists.' })
-    // } else {
-    //     res.json({ message: 'Email is available. Have a taco.'})
-    // }
+    if( User.findBy({ email: req.body.email }) ){
+        res.json({ message: 'User with that email already exists.' })
+    } 
 
     // Grab and hash password
     const hash = bcrypt.hashSync(req.body.password, 10)
@@ -93,7 +88,7 @@ router.post('/registration', (req, res) => {
     })
     .catch( err => {
         res.json({ message: 'Failed to create user.', error: err})
-    })
+    })     
 })
 
 
