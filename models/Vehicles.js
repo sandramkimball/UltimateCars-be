@@ -77,7 +77,7 @@ const VehicleSchema = mongoose.Schema({
         required: false
     }],
     features: [{
-        type: Schema.Types.ObjectId,
+        type: String,
         required: false
     }],
 })
