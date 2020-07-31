@@ -45,11 +45,12 @@ router.post('/login', (req, res) => {
 
 // REGISTER NEW USER
 router.post('/register', async (req, res) => {
-    // Create newUser and hash password
-    let newUser = req.body 
-    newUser.password = await bcrypt.hashSync(newUser.password, 10)
-
     try{
+        // Create newUser and hash password
+        let newUser = req.body 
+        let hash = await bcrypt.hashSync(newUser.password, 10)
+        newUser.password = hash
+
         User.add(newUser)
         .then( saved => {
             res.json({ message: 'New user added.', data: saved })
@@ -64,18 +65,18 @@ router.post('/register', async (req, res) => {
 })
 
 router.post('/registration', async (req, res) => {
-    // Create newUser object:
-    let hash = await bcrypt.hashSync(req.body.password, 10)
-    const newUser =  new User({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: hash,
-        city: req.body.city,
-        state: req.body.state,
-    })
-
     try {
+        // Create newUser object:
+        let hash = await bcrypt.hashSync(req.body.password, 10)
+        const newUser =  new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: hash,
+            city: req.body.city,
+            state: req.body.state,
+        })
+
         // Save newUser
         newUser.save()
         .then( saved => {
