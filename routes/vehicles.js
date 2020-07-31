@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
     })
 })
 
-// GET ONE CAR
+// GET CAR BY ID
 router.get('/:id', (req, res) => {
     Vehicle.find({id: req.body._id})
     .then(vehicle => {
@@ -27,31 +27,52 @@ router.get('/:id', (req, res) => {
 
 // POST A NEW CAR
 router.post('/', (req, res) => {
-    // Add Image
-    // var image = new Image
-    // image.img.data = fs.readFileSync(imgPath);
-    // image.img.contentType = 'image/jpg'
-    // image.save()
-    // .then( () => {
-    //     res.json({ message: 'Image saved.' })
-    // })
-    // .catch( err => {
-    //     res.json({ message: err.message, error: err })
-    // })
-
-    // Add Vehicle 
-    let newVehicle = req.body
+    // Create new vehicle object:
+    const newCar = new Vehicle({
+        make: req.body.make,
+        model: req.body.model,
+        year: req.body.year,
+        miles: req.body.miles,
+        price: req.body.price,
+        vin: req.body.vin,
+        description: req.body.description,
+        features: req.body.features,
+        isNew: req.body.isNew,
+        engine: req.body.engine,
+        body: req.body.body,
+        transmission: req.body.transmission,
+        fuel: req.body.fuel,
+        color: req.body.color,
+        tags: req.body.tags
+    })
     
-    Vehicle.add(newVehicle)
-    .then( () => {
-        res.json({ message: 'Vehicle saved.', data: newVehicle })
+    // Add new vehicle.
+    newCar.save()
+    .then( (newCar) => {
+        console.log('Car added.')
+        res.json({ message: 'Vehicle saved.', data: newCar })
     })
     .catch( err => {
+        console.log('Unable to insert car.', err)
         res.json({ message: 'Error creating vehicle.', error: err })
     })
 })
 
-// PUT UPDATE A CAR
+// POST IMAGE
+router.post('/image', (req, res) => {
+    var image = new Image
+    image.img.data = fs.readFileSync(imgPath);
+    image.img.contentType = 'image/jpg'
+    image.save()
+    .then( () => {
+        res.json({ message: 'Image saved.' })
+    })
+    .catch( err => {
+        res.json({ message: err.message, error: err })
+    })
+})
+
+// UPDATE A CAR
 router.put('/:id', (req, res) => {
     var id = req.params.id
     Vehicle.findByIdAndUpdate({ id })
