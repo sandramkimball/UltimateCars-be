@@ -33,7 +33,7 @@ router.post('/', (req, res) => {
         model: req.body.model,
         body: req.body.body,
         drive: req.body.drive,
-        isNew: req.body.isNew,
+        newCar: req.body.isNew,
         engine: req.body.engine,
         transmission: req.body.transmission,
         fuel: req.body.fuel,
