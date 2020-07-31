@@ -31,19 +31,21 @@ router.post('/', (req, res) => {
     const newCar = new Vehicle({
         make: req.body.make,
         model: req.body.model,
+        body: req.body.body,
+        drive: req.body.drive,
+        isNew: req.body.isNew,
+        engine: req.body.engine,
+        transmission: req.body.transmission,
+        fuel: req.body.fuel,
+        color: req.body.color,
         year: req.body.year,
         miles: req.body.miles,
         price: req.body.price,
         vin: req.body.vin,
         description: req.body.description,
+        image_profile: req.body.image_profile,
+        tags: req.body.tags,
         features: req.body.features,
-        isNew: req.body.isNew,
-        engine: req.body.engine,
-        body: req.body.body,
-        transmission: req.body.transmission,
-        fuel: req.body.fuel,
-        color: req.body.color,
-        tags: req.body.tags
     })
     
     // Add new vehicle.
