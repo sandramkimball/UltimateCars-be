@@ -10,12 +10,16 @@ const VehicleSchema = mongoose.Schema({
         type: String,
         required: false
     },
-    bodyType: {
+    body: {
         type: String,
         required: true
     },
-    driveType: {
+    drive: {
         type: String,
+        required: true
+    },
+    isNew: {
+        type: Boolean,
         required: true
     },
     engine: {
@@ -59,6 +63,10 @@ const VehicleSchema = mongoose.Schema({
         type: String,
         required: false,
     },
+    image_profile: {
+        type: String,
+        required: false,
+    },
     tags: [{
         type: String,
         required: false,
@@ -68,11 +76,10 @@ const VehicleSchema = mongoose.Schema({
         ref: 'Images',
         required: false
     }],
-    seller: {
+    features: [{
         type: Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    }
+        required: false
+    }],
 })
 
 module.exports = mongoose.model('Vehicles', VehicleSchema)
