@@ -64,13 +64,12 @@ router.post('/register', (req, res) => {
     })
 })
 
-router.post('/registration', (req, res) => {
+router.post('/registration', async (req, res) => {
     if( User.find({ email: req.body.email }) ){
         res.json({ message: 'User with that email already exists.' })
     }  else {
 
         // Grab and hash password
-        const password = await req.body.password;
         const hash = await bcrypt.hashSync(req.body.password, 10)
 
         // const salt = await bcrypt.genSaltSync(10);
