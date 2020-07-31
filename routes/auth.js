@@ -51,46 +51,52 @@ router.post('/register', async (req, res) => {
         res.json({ message: 'User with that email already exists.' })
     } 
 
-    // grab and hash password
-    const hash = await bcrypt.hashSync(newUser.password, 10)
-    newUser.password = hash
+    try{
+        // grab and hash password
+        const hash = await bcrypt.hashSync(newUser.password, 10)
+        newUser.password = hash
 
-    User.add(newUser)
-    .then( saved => {
-        res.json({ message: 'New user created.', data: saved })
-    })
-    .catch( err => {
-        res.json({ message: 'Failed to create user.', error: err})
-    })
+        User.add(newUser)
+        .then( saved => {
+            res.json({ message: 'New user created.', data: saved })
+        })
+        .catch( err => {
+            res.json({ message: 'Failed to add user to table.', error: err})
+        })
+    }
+    catch {
+        res.json({ message: 'Issue with creating user, password hash or other.', error: err})
+    }
 })
 
 router.post('/registration', async (req, res) => {
-    // Grab and hash password
-    const hash = await bcrypt.hashSync(req.body.password, 10)
+    try{
+        // Grab and hash password
+        const hash = await bcrypt.hashSync(req.body.password, 10)
 
-    // const salt = await bcrypt.genSaltSync(10);
-    // const password = await req.body.password;
+        // const salt = await bcrypt.genSalt(10);
+        // const hash = await bcrypt.hash(req.body.password, salt);
 
-    // const salt = await bcrypt.genSalt(10);
-    // const hash = await bcrypt.hash(req.body.password, salt);
+        // Create new user object.
+        const newUser = await new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: hash,
+            city: req.body.city,
+            state: req.body.state,
+        })
 
-    // Create new user object.
-    const newUser = new User({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: hash,
-        city: req.body.city,
-        state: req.body.state,
-    })
-
-    newUser.save()
-    .then( saved => {
-        res.json({ message: 'New user created.', data: saved })
-    })
-    .catch( err => {
-        res.json({ message: 'Failed to create user.', error: err})
-    })    
+        newUser.save()
+        .then( saved => {
+            res.json({ message: 'New user created.', data: saved })
+        })
+        .catch( err => {
+            res.json({ message: 'Failed to save user.', error: err})
+        })    
+    } catch {
+        res.json({ message: 'Unable to create user or hash password.', error: err})
+    }
 })
 
 
