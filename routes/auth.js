@@ -20,9 +20,6 @@ function getJwtToken(user){
     return jwt.sign(payload, secret, options)
 }
 
-router.get('/test', (req, res) => {
-    res.json({message: 'burrito car'})
-})
 
 // LOGIN - GET A USER
 router.post('/login', (req, res) => {
@@ -49,11 +46,11 @@ router.post('/login', (req, res) => {
 // REGISTER -A NEW USER
 router.post('/register', (req, res) => {
     
-    if( User.find({email: req.body.email}) ){
-        res.json({ message: 'User with that email already exists.' })
-    } else {
-        res.json({ message: 'Email is available. Have a taco.'})
-    }
+    // if( User.findBy({email: req.body.email}) ){
+    //     res.json({ message: 'User with that email already exists.' })
+    // } else {
+    //     res.json({ message: 'Email is available. Have a taco.'})
+    // }
 
     let newUser = req.body
 
@@ -71,11 +68,11 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/registration', (req, res) => {
-    if( User.find({email: req.body.email}) ){
-        res.json({ message: 'User with that email already exists.' })
-    } else {
-        res.json({ message: 'Email is available. Have a taco.'})
-    }
+    // if( User.findBy({email: req.body.email}) ){
+    //     res.json({ message: 'User with that email already exists.' })
+    // } else {
+    //     res.json({ message: 'Email is available. Have a taco.'})
+    // }
 
     // Grab and hash password
     const hash = bcrypt.hashSync(req.body.password, 10)
