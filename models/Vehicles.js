@@ -18,7 +18,7 @@ const VehicleSchema = mongoose.Schema({
         type: String,
         required: false
     },
-    isNew: {
+    newCar: {
         type: Boolean,
         required: false
     },
