@@ -29,7 +29,7 @@ router.post('/login', (req, res) => {
         return res.json({status: 401, message: 'Missing email or password.'})
     }
 
-    User.findBy({ email })
+    User.find({ email: req.body.email })
     .then(user => {
         if (user && bcrypt.compareSync(password, user.password)){
             const token = getJwtToken(user);
