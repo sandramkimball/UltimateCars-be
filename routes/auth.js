@@ -48,6 +48,7 @@ router.post('/login', (req, res) => {
 
 // REGISTER -A NEW USER
 router.post('/register', (req, res) => {
+    res.json({message: 'chimichanga car'})
     let newUser = req.body
 
     // grab and hash password
@@ -64,6 +65,7 @@ router.post('/register', (req, res) => {
 })
 
 router.post('/registration', (req, res) => {
+    res.json({message: 'taco car'})
     // Grab and hash password
     const hash = bcrypt.hashSync(req.body.password, 10)
 
