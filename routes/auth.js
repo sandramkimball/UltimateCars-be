@@ -42,7 +42,7 @@ router.post('/login', (req, res) => {
     })
 })
 
-// REGISTER - POST A NEW USER
+// REGISTER -A NEW USER
 router.post('/register', (req, res) => {
     let newUser = req.body
 
@@ -58,5 +58,31 @@ router.post('/register', (req, res) => {
         res.json({ message: 'Failed to create user.', error: err})
     })
 })
+
+router.post('/registration', (req, res) => {
+    // Grab and hash password
+    const hash = bcrypt.hashSync(req.body.password, 10)
+    newUser.password = hash
+
+    // Create new user object.
+    const newUser = new User({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: hash,
+        city: req.body.city,
+        state: req.body.state,
+
+    })
+
+    newUser.save()
+    .then( saved => {
+        res.json({ message: 'New user created.', data: saved })
+    })
+    .catch( err => {
+        res.json({ message: 'Failed to create user.', error: err})
+    })
+})
+
 
 module.exports = router;

@@ -26,10 +26,6 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    isAdmin: {
-        type: Boolean,
-        required: true
-    },
     avatar: {
         data: Buffer,
         contentType: String,
