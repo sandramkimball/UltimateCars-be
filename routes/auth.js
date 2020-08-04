@@ -47,21 +47,19 @@ router.post('/login', (req, res) => {
 // REGISTER NEW USER
 // SKIPS TO END RESULT
 router.post('/register', (req, res) => {
-    try{
-        // Create newUser
-        const newUser =  new User({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password: req.body.password,
-            city: req.body.city,
-            state: req.body.state,
-        })
-    } catch(err){
-        res.json({ message: `You don\'t really exist, ${req.body.firstName}.`, error: err})
-    }
+    // Create newUser
+    const newUser =  new User({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password,
+        city: req.body.city,
+        state: req.body.state,
+    })
 
-    try{
+    if(newUser.firstName === undefined || req.body.firstName === undefined || req.body.firstName === null){
+        res.json({ message: `You don\'t really exist.`, error: err})
+    } else{
         User.add(newUser)
         .then( saved => {
             res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: saved })
@@ -70,32 +68,29 @@ router.post('/register', (req, res) => {
             res.json({ message: `Failed to add ${req.body.firstName} because you\'re a shitty driver.`, error: err})
         })
     }
-    catch (err){
-        res.json({ message: 'I don\'t even know.', error: err})
-    }
 })
 
 //  CANT FIND PATHS
 router.post('/registration', (req, res) => {
-        // Create newUser
-        const newUser =  new User({
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            password: req.body.password,
-            city: req.body.city,
-            state: req.body.state,
-        })
+    // Create newUser
+    const newUser =  new User({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password,
+        city: req.body.city,
+        state: req.body.state,
+    })
 
-        if(req.body.firstName === null){
-            return res.json({ message: 'WE GOT A NO NAME!'})
-        }
-        
-        if(newUser.firstName === null){
-            return res.json({ message: 'NO NEW USER!'})
-        }
+    if(req.body.firstName === null){
+        return res.json({ message: 'WE GOT A NO NAME!'})
+    }
+    
+    if(newUser.firstName === null){
+        return res.json({ message: 'NO NEW USER!'})
+    }
 
-    try{
+    else {
         // Save newUser
         newUser.save()
         .then( saved => {
@@ -104,8 +99,6 @@ router.post('/registration', (req, res) => {
         .catch( err => {
             res.json({ message: `Failed to save ${newUser.firstName} because you\'re mother drives a lemon.`, error: err})
         })  
-    } catch (err){
-        res.json({ message: 'Obviously issue finding the driver.', error: err})
     }
 })
 
