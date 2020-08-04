@@ -59,10 +59,10 @@ router.post('/register', async (req, res) => {
 
         User.add(newUser)
         .then( saved => {
-            res.json({ message: 'New user added.', data: saved })
+            res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: saved })
         })
         .catch( err => {
-            res.json({ message: 'Failed to add new user.', error: err})
+            res.json({ message: `Failed to add ${newUser.firstName} because you\'re a shitty driver.`, error: err})
         })
     }
     catch (err){
@@ -85,10 +85,10 @@ router.post('/registration', async (req, res) => {
         // Save newUser
         newUser.save()
         .then( saved => {
-            res.json({ message: 'New user saved.', data: saved })
+            res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: saved })
         })
         .catch( err => {
-            res.json({ message: 'Failed to save user.', error: err})
+            res.json({ message: `Failed to save ${newUser.firstName} because you\'re mother drives a lemon.`, error: err})
         })  
     } catch (err){
         res.json({ message: 'I don\'t even know.', error: err})
