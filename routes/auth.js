@@ -69,7 +69,7 @@ router.post('/register', (req, res) => {
 //  CANT FIND PATHS
 router.post('/registration', (req, res) => {
     if(req.body.firstName === undefined){
-        return res.json({ message: 'WE GOT A NO NAME!'})
+        return res.json({ message: 'WE GOT A NO NAME!', data: req.body})
     } 
 
     else { 
