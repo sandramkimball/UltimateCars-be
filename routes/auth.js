@@ -48,7 +48,7 @@ router.post('/login', (req, res) => {
 // SKIPS TO END RESULT
 router.post('/register', (req, res) => {
     // Create newUser
-    const newUser =  new User({
+    const newUser = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
@@ -62,19 +62,19 @@ router.post('/register', (req, res) => {
         res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: saved })
     })
     .catch( err => {
-        res.json({ message: `Failed to add ${req.body.firstName} because you\'re a shitty driver.`, error: err})
+        res.json({ message: `Failed to add ${newUser.firstName} because you\'re a shitty driver.`, error: err})
     })
 })
 
 //  CANT FIND PATHS
 router.post('/registration', (req, res) => {
-    if(req.body.firstName === null){
+    if(req.body.firstName === undefined){
         return res.json({ message: 'WE GOT A NO NAME!'})
     } 
 
     else { 
         // Create newUser
-        const newUser =  new User({
+        const newUser = new User({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
