@@ -23,9 +23,10 @@ function getJwtToken(user){
 
 // LOGIN - GET USER
 router.post('/login', (req, res) => {
-    let { email, password } = req.body;
+    let email = req.body.email;
+    let password = req.body.password;
     
-    if(!email || !password){
+    if(email === null || password === null){
         return res.json({status: 401, message: 'Missing email or password.'})
     }
 
@@ -47,7 +48,14 @@ router.post('/login', (req, res) => {
 router.post('/register', async (req, res) => {
     try{
         // Create newUser
-        let newUser = req.body 
+        const newUser =  new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: req.body.password,
+            city: req.body.city,
+            state: req.body.state,
+        })
 
         User.add(newUser)
         .then( saved => {
