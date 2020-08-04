@@ -88,8 +88,7 @@ router.put('/:id', (req, res) => {
 
 // DELETE A CAR
 router.delete('/:id', (req, res) => {
-    var carId = req.params.id
-    Vehicle.deleteOne({_id: carId })
+    Vehicle.deleteOne({ "_id": ObjectId(req.params.id) })
     .then( () => {
         res.json({ message: 'Vehicle deleted.' })
     })

@@ -33,7 +33,7 @@ router.post('/login', (req, res) => {
     .then(user => {
         if (user && bcrypt.compareSync(password, user.password)){
             const token = getJwtToken(user);
-            res.json({status: 200, token, user})
+            res.json({status: 200, message: `Welcome back ${user.firstName}`, data: {token, user} })
         } else {
             res.json({ status: 404, message: 'Email or password is incorrect.'})
         }
