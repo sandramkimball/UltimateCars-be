@@ -57,40 +57,32 @@ router.post('/register', (req, res) => {
         state: req.body.state,
     })
 
-    if(newUser.firstName === undefined || req.body.firstName === undefined || req.body.firstName === null){
-        res.json({ message: `You don\'t really exist.`, error: err})
-    } else{
-        User.add(newUser)
-        .then( saved => {
-            res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: saved })
-        })
-        .catch( err => {
-            res.json({ message: `Failed to add ${req.body.firstName} because you\'re a shitty driver.`, error: err})
-        })
-    }
+    newUser.save()
+    .then( saved => {
+        res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: saved })
+    })
+    .catch( err => {
+        res.json({ message: `Failed to add ${req.body.firstName} because you\'re a shitty driver.`, error: err})
+    })
 })
 
 //  CANT FIND PATHS
 router.post('/registration', (req, res) => {
-    // Create newUser
-    const newUser =  new User({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: req.body.password,
-        city: req.body.city,
-        state: req.body.state,
-    })
-
     if(req.body.firstName === null){
         return res.json({ message: 'WE GOT A NO NAME!'})
-    }
-    
-    if(newUser.firstName === null){
-        return res.json({ message: 'NO NEW USER!'})
-    }
+    } 
 
-    else {
+    else { 
+        // Create newUser
+        const newUser =  new User({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            password: req.body.password,
+            city: req.body.city,
+            state: req.body.state,
+        })
+
         // Save newUser
         newUser.save()
         .then( saved => {
