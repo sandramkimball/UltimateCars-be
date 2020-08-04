@@ -62,7 +62,7 @@ router.post('/register', (req, res) => {
         res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: saved })
     })
     .catch( err => {
-        res.json({ message: `Failed to add ${newUser.firstName} because you\'re a shitty driver.`, error: err})
+        res.json({ message: `Failed to add ${newUser.firstName} because you\'re a shitty driver.`, data: req.body, error: err})
     })
 })
 
