@@ -46,10 +46,8 @@ router.post('/login', (req, res) => {
 // REGISTER NEW USER
 router.post('/register', async (req, res) => {
     try{
-        // Create newUser and hash password
+        // Create newUser
         let newUser = req.body 
-        let hash = await bcrypt.hashSync(newUser.password, 10)
-        newUser.password = hash
 
         User.add(newUser)
         .then( saved => {
@@ -65,20 +63,13 @@ router.post('/register', async (req, res) => {
 })
 
 router.post('/registration', async (req, res) => {
-    try {
-        // Create newUser object:
-        let hash = await bcrypt.hashSync(req.body.password, 10)
-    } catch {
-        res.json({message: 'Could not hash password.'})
-    }
-
     try{
         // Create newUser
         const newUser =  new User({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            password: hash,
+            password: req.body.password,
             city: req.body.city,
             state: req.body.state,
         })
