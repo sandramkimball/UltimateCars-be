@@ -1,8 +1,8 @@
-var mongoose = require('mongoose')
-var createError = require('http-errors')
-var express = require('express')
-var logger = require('morgan')
-var cors = require('cors')
+const mongoose = require('mongoose')
+const express = require('express')
+const logger = require('morgan')
+const cors = require('cors')
+const body_parser = require('body-parser');
 
 // DB Config
 require('dotenv').config()
@@ -22,6 +22,8 @@ var app = express()
 app.use(cors())
 app.use(logger('dev'))
 app.use(express.json())
+app.use(body_parser.json());
+app.use(body_parser.urlencoded({extended: true}));
 
 // Api Routes
 app.use('/', indexRouter)
@@ -30,19 +32,6 @@ app.use('/user', userRouter)
 app.use('/vehicles', vehiclesRouter)
 app.use('/images', imagesRouter)
 
-// Handle 404 Error
-// app.use( (req, res, next) => {
-//     next(createError(404))
-// });
-
-// app.use( (err, req, res, next) => {
-//     // only in development
-//     res.locals.message = err.message
-//     res.locals.error = req.app.get('env') === 'development' ? error : {}
-
-//     // render error pg
-//     res.json({status: err.status || 500, error: err})
-// })
 
 // DB Connect
 mongoose.connect(URI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}, ()=> console.log('  ---MONGOOSE: connected') )

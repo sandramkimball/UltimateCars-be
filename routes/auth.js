@@ -62,13 +62,13 @@ router.post('/register', (req, res) => {
         res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: newUser })
     })
     .catch( err => {
-        res.json({ message: `You can\'t joing the club because you\'re a sucky driver.`, data: JSON.stringify(req), error: err})
+        res.json({ message: `You can\'t joing the club because you\'re a sucky driver.`, error: err})
     })
 })
 
-router.post('/registration', (req, res) => {
+router.post('/registration', async (req, res) => {
     if(req.body.firstName === undefined){
-        return res.json({ message: 'WE GOT A NO NAME!', data: req })
+        return res.json({ message: 'WE GOT A NO NAME!' })
     } 
 
     else { 
@@ -85,10 +85,10 @@ router.post('/registration', (req, res) => {
         // Save newUser
         newUser.save()
         .then( newUser => {
-            res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: newUser, test: req })
+            res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: newUser, test: JSON.stringify(req) })
         })
         .catch( err => {
-            res.json({ message: `You\'re mother drives a lemon.`, data: req, error: err})
+            res.json({ message: `You\'re mother drives a lemon.`, data: JSON.stringify(req), error: err})
         })  
     }
 })
