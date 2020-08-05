@@ -32,12 +32,7 @@ const UserSchema = mongoose.Schema({
         data: Buffer,
         contentType: String,
         required: false
-    },
-    vehicles: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Vehicles',
-        required: false
-    }]
+    }
 })
 
 // Virtuals - set methods

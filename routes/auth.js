@@ -85,10 +85,10 @@ router.post('/registration', (req, res) => {
         // Save newUser
         newUser.save()
         .then( user => {
-            res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: user, test: req.body })
+            res.json({ message: `Welcome to the team, ${user.firstName}.`, data: user, test: req.body })
         })
         .catch( err => {
-            res.json({ message: `Failed to save ${newUser.firstName} because you\'re mother drives a lemon.`, error: err})
+            res.json({ message: `You\'re mother drives a lemon.`, error: err})
         })  
     }
 })
