@@ -52,7 +52,7 @@ router.post('/register', (req, res) => {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         email: req.body.email,
-        password: req.body.password,
+        _password: req.body.password,
         city: req.body.city,
         state: req.body.state,
     })
@@ -78,7 +78,7 @@ router.post('/registration', (req, res) => {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             email: req.body.email,
-            password: req.body.password,
+            _password: req.body.password,
             city: req.body.city,
             state: req.body.state,
         })
