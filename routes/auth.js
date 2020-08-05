@@ -48,7 +48,7 @@ router.post('/register', async (req, res) => {
         res.json({ message: "There is already a user with that email."})
         return 
     }
-    
+
     // Create new user object:
     const newUser = new User({
         firstName: req.body.firstName,
@@ -69,6 +69,22 @@ router.post('/register', async (req, res) => {
     })
 })
 
+// UPDATE USER
+router.put(':id', (req, res) => {
+    var updates = req.body
+    User.findByIdAndUpdate( req.params.id, updates )
+    .then( user => {
+        res.json({ message: 'User updated.', data: user })
+    })
+    .catch( err => res.json({error: err}))
+})
+
+// DELETE USER
+router.delete('/:id', (req, res) => {
+    User.remove({_id: req.params.id})
+    .then( ()=> res.json({ message: 'User deleted.'}) )
+    .catch( err => res.json({ error: err }) )
+})
 
 
 module.exports = router;

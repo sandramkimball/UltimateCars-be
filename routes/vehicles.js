@@ -77,7 +77,9 @@ router.post('/image', (req, res) => {
 // UPDATE A CAR
 router.put('/:id', (req, res) => {
     var id = req.params.id
-    Vehicle.findByIdAndUpdate({ id })
+    var updates = req.body
+    
+    Vehicle.findByIdAndUpdate(id, updates)
     .then( vehicle => {
         res.json({ message: 'Vehicle updated', data: vehicle })
     })
