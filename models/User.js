@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcryptjs');
 
+// Define User Model:
 const UserSchema = mongoose.Schema({
     firstName: {
         type: String,
@@ -39,17 +40,32 @@ const UserSchema = mongoose.Schema({
     }]
 })
 
+// Virtuals - set methods
+UserSchema
+    .virtual('password')
+    .set( password => {
+        this.password = password
+    })
+
+// Pre Save?
 UserSchema.pre('save', async function save(next) {
-    if (!this.isModified('password')) return next();
-    try {
-        const salt = await bcrypt.genSalt(10);
-        this.password = await bcrypt.hash(this.password, salt)
-        return next()
-    } catch (err) {
-        return next(err)
-    }
+    if (this.password === undefined) return next();
+
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt)
+    return next()
+
+    // bcrypt.genSalt( 10, (err, salt) => {
+    //     if(err) console.log(err)
+    //     bcrypt.hash(this.password, sal, (err, hash) => {
+    //         if (err) console.log(err)
+    //         this.password = bcrypt.hash
+    //         next()
+    //     })
+    // })
 })
 
+// Methods
 UserSchema.methods.validatePassword = async function validatePassword(data){
     return bcrypt.compare(data, this.password)
 }
