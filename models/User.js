@@ -36,25 +36,23 @@ const UserSchema = mongoose.Schema({
 })
 
 // Virtuals - set methods
-UserSchema
-    .virtual('password')
-    .set( password => {
-        this._password = password
-    })
+// UserSchema.virtual('password').set( password => {
+//         this._password = password
+// })
 
-// Pre Save?
-UserSchema.pre('save', async function save(next) {
-    if (this.password === undefined) return next();
+// // Pre Save?
+// UserSchema.pre('save', async function save(next) {
+//     if (this.password === undefined) return next();
 
-    const salt = await bcrypt.genSalt(10);
-    this.password = await bcrypt.hash(this.password, salt)
-    return next()
-})
+//     const salt = await bcrypt.genSalt(10);
+//     this.password = await bcrypt.hash(this.password, salt)
+//     return next()
+// })
 
-// Methods
-UserSchema.methods.validatePassword = async function validatePassword(data){
-    return bcrypt.compare(data, this.password)
-}
+// // Methods
+// UserSchema.methods.validatePassword = async function validatePassword(data){
+//     return bcrypt.compare(data, this.password)
+// }
 
 
 module.exports = mongoose.model('User', UserSchema)

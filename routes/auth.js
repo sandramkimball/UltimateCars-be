@@ -68,7 +68,7 @@ router.post('/register', (req, res) => {
 
 router.post('/registration', (req, res) => {
     if(req.body.firstName === undefined){
-        return res.json({ message: 'WE GOT A NO NAME!', data: JSON.stringify(req) })
+        return res.json({ message: 'WE GOT A NO NAME!', data: req })
     } 
 
     else { 
@@ -85,10 +85,10 @@ router.post('/registration', (req, res) => {
         // Save newUser
         newUser.save()
         .then( newUser => {
-            res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: user, test: req.body })
+            res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: newUser, test: req })
         })
         .catch( err => {
-            res.json({ message: `You\'re mother drives a lemon.`, error: err})
+            res.json({ message: `You\'re mother drives a lemon.`, data: req, error: err})
         })  
     }
 })
