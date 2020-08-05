@@ -1,6 +1,5 @@
 var express = require('express')
 var router = express.Router()
-var bcrypt = require('bcryptjs')
 var jwt = require('jsonwebtoken')
 var User = require('../models/User')
 require('dotenv')
@@ -42,7 +41,14 @@ router.post('/login', (req, res) => {
 })
 
 // REGISTER NEW USER
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
+    var doesEmailExist = await User.findOne({ email: req.body.email }).exec()
+    
+    if(doesEmailExist){
+        res.json({ message: "There is already a user with that email."})
+        return 
+    }
+    
     // Create new user object:
     const newUser = new User({
         firstName: req.body.firstName,

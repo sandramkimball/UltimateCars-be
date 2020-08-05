@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema
 const bcrypt = require('bcryptjs');
 
 // Define User Model:
@@ -13,6 +14,7 @@ const UserSchema = mongoose.Schema({
     },
     email: {
         type: String,
+        unique: true,
         required: false
     },
     _password: {
@@ -31,7 +33,12 @@ const UserSchema = mongoose.Schema({
         data: Buffer,
         contentType: String,
         required: false
-    }
+    },
+    vehicles: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Vehicles',
+        required: false
+    }],
 })
 
 // Virtuals - set methods
