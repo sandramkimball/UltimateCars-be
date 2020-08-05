@@ -68,7 +68,7 @@ router.post('/register', (req, res) => {
 
 router.post('/registration', (req, res) => {
     if(req.body.firstName === undefined){
-        return res.json({ message: 'WE GOT A NO NAME!', data: req})
+        return res.json({ message: 'WE GOT A NO NAME!', data: JSON.stringify(req) })
     } 
 
     else { 
