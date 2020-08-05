@@ -16,7 +16,7 @@ const UserSchema = mongoose.Schema({
         type: String,
         required: false
     },
-    password: {
+    _password: {
         type: String,
         required: false
     },
@@ -44,7 +44,7 @@ const UserSchema = mongoose.Schema({
 UserSchema
     .virtual('password')
     .set( password => {
-        this.password = password
+        this._password = password
     })
 
 // Pre Save?
