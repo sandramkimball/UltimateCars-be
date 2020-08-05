@@ -32,7 +32,7 @@ router.post('/login', (req, res) => {
 
     User.find({ email: req.body.email })
     .then(user => {
-        if (user && bcrypt.compareSync(password, user.password)){
+        if (user && bcrypt.compareSync(password, user._password)){
             const token = getJwtToken(user);
             res.json({status: 200, message: `Welcome back ${user.firstName}`, data: {token, user} })
         } else {
@@ -45,9 +45,8 @@ router.post('/login', (req, res) => {
 })
 
 // REGISTER NEW USER
-// SKIPS TO END RESULT
 router.post('/register', (req, res) => {
-    // Create newUser
+    // Create new user object:
     const newUser = new User({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -57,16 +56,16 @@ router.post('/register', (req, res) => {
         state: req.body.state,
     })
 
+    // Save new user:
     newUser.save()
-    .then( saved => {
-        res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: saved })
+    .then( (newUser)  => {
+        res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: newUser })
     })
     .catch( err => {
         res.json({ message: `Failed to add ${newUser.firstName} because you\'re a shitty driver.`, data: req.body, error: err})
     })
 })
 
-//  CANT FIND PATHS
 router.post('/registration', (req, res) => {
     if(req.body.firstName === undefined){
         return res.json({ message: 'WE GOT A NO NAME!', data: req})
@@ -85,8 +84,8 @@ router.post('/registration', (req, res) => {
 
         // Save newUser
         newUser.save()
-        .then( saved => {
-            res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: saved })
+        .then( user => {
+            res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: {user, req.body} })
         })
         .catch( err => {
             res.json({ message: `Failed to save ${newUser.firstName} because you\'re mother drives a lemon.`, error: err})
