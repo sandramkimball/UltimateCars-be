@@ -62,7 +62,7 @@ router.post('/register', (req, res) => {
         res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: newUser })
     })
     .catch( err => {
-        res.json({ message: `Failed to add ${newUser.firstName} because you\'re a shitty driver.`, data: req.body, error: err})
+        res.json({ message: `You can\'t joing the club because you\'re a sucky driver.`, data: JSON.stringify(req), error: err})
     })
 })
 
@@ -84,8 +84,8 @@ router.post('/registration', (req, res) => {
 
         // Save newUser
         newUser.save()
-        .then( user => {
-            res.json({ message: `Welcome to the team, ${user.firstName}.`, data: user, test: req.body })
+        .then( newUser => {
+            res.json({ message: `Welcome to the team, ${newUser.firstName}.`, data: user, test: req.body })
         })
         .catch( err => {
             res.json({ message: `You\'re mother drives a lemon.`, error: err})
