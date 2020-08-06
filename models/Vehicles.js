@@ -80,6 +80,11 @@ const VehicleSchema = mongoose.Schema({
         type: String,
         required: false
     }],
+    user_id: {
+        type: String,
+        ref: 'User',
+        required: false
+    }
 })
 
 module.exports = mongoose.model('Vehicles', VehicleSchema)
