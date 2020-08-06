@@ -26,12 +26,12 @@ router.get('/:id', (req, res) => {
 })
 
 // GET CAR BY SPECIFIC PARAMETER
-router.get('/find_by', (req, res) => {
-    let userID = req.body.user_id
+router.get('/find_by/:id', (req, res) => {
+    let userID = req.params.id
 
     Vehicle.find({ user_id: userID })
     .then(vehicle => {
-        res.json({data: vehicle})
+        res.json({message: `Cars belonging to user #${userID}`, data: vehicle})
     })
     .catch( err => {
         res.json({message: 'No matching vehicles.', data: err})
