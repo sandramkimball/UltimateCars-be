@@ -70,18 +70,19 @@ const dataExtractor = (data) => {
     }
     
     try {
-        let allMakes = getMakes( data )
+        // let allMakes = getMakes( data )
         let allYears = getYears( data )
         let maxPrice = getMaxPrice( data )
 
-        stats.push( allMakes)
+        // stats.push( allMakes)
         stats.push( allYears )
         stats.push ( maxPrice)
-        return stats
     
     } catch {
         throw new Error( 'Error extracting data.' )
     }
+        
+    return stats
 }
 
 
