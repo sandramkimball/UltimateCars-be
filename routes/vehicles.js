@@ -41,12 +41,13 @@ router.get('/find_by/:id', (req, res) => {
 
 // GET CAR STATISTICS
 router.get('/statistics', (req, res) => {
-    let stats = dataExtractor(Vehicle)
+    let vehicles = Vehicle.find().exec()
+    let stats = dataExtractor( vehicles )
 
     try { 
-        res.json({ data: stats})
-    } catch( err ) {
-        res.json({message: 'No matching vehicles.', data: err})
+        res.json({ data: stats })
+    } catch ( err ) {
+        res.json({message: 'Function error getting statistics.', data: err})
     }
 })
 
