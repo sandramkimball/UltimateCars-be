@@ -33,7 +33,7 @@ const dataExtractor = (data) => {
             let car = data[k]
             var make = car['make']
 
-            // If make is not in array, add key and value (array of matching models).
+            // If car make is not in arr, add key and value (array of matching models).
             if ( !allMakes.has( make ) ){           
                 allMakes.set( make, getModels(data, make) )
             }
@@ -53,7 +53,7 @@ const dataExtractor = (data) => {
             }
         }
 
-        return appYears.sort()
+        return {"allYears": allYears.sort()}
     };
 
     const getMaxPrice = ( data ) => {
@@ -66,7 +66,7 @@ const dataExtractor = (data) => {
             }
         }
 
-        return maxPrice
+        return { 'maxPrice': maxPrice }
     }
     
     try {
