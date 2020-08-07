@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var dataExtractor = require('../models/dataExtractor')
 
 var Vehicle = require('../models/Vehicles');
 
@@ -25,7 +26,7 @@ router.get('/:id', (req, res) => {
     })
 })
 
-// GET CAR BY SPECIFIC PARAMETER
+// GET CAR BY USER_ID
 router.get('/find_by/:id', (req, res) => {
     let userID = req.params.id
 
@@ -36,6 +37,17 @@ router.get('/find_by/:id', (req, res) => {
     .catch( err => {
         res.json({message: 'No matching vehicles.', data: err})
     })
+})
+
+// GET CAR STATISTICS
+router.get('/statistics', (req, res) => {
+    let stats = dataExtractor(Vehicle)
+
+    try { 
+        res.json({ data: stats})
+    } catch( err ) {
+        res.json({message: 'No matching vehicles.', data: err})
+    }
 })
 
 // POST A NEW CAR

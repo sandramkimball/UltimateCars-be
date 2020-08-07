@@ -1,8 +1,9 @@
-const data = require( "../database/data.json")
 
-try {
-    // Create array of model objects: { 'GR Supra' : 7 } 
-    getModels = ( data, make ) => {
+const dataExtractor = (data) => {
+    let stats = []
+
+    // Callback Func - creates array of model objects: { 'GR Supra' : 7 } 
+    const getModels = ( data, make ) => {
         let allModels = new Map()
 
         for ( k in data ){      
@@ -21,12 +22,11 @@ try {
         }
 
         allModels = Array.from(allModels, ([name, value]) => ({ name, value }))
-
         return allModels
     };
 
     // Create array of make objects: { key: make, value: [array of model objs] }
-    getMakes = ( data ) => {
+    const getMakes = ( data ) => {
         let allMakes = new Map()
 
         for ( k in data ){
@@ -40,11 +40,10 @@ try {
         }
 
         allMakes = Array.from(allMakes, ([name, value]) => ({ name, value }))
-
-        return allMakes;
+        return allMakes
     };
 
-    getYears = ( data ) => {
+    const getYears = ( data ) => {
         let allYears = [];
 
         for ( k in data){
@@ -54,10 +53,10 @@ try {
             }
         }
 
-        return allYears.sort()
+        return appYears.sort()
     };
 
-    getMaxPrice = ( data ) => {
+    const getMaxPrice = ( data ) => {
         let maxPrice = 0;
 
         for (k in data){
@@ -67,12 +66,21 @@ try {
             }
         }
 
-        return maxPrice;
+        return maxPrice
     }
- 
-} catch {
-    console.log('Error extracting data.')
+    
+    try {
+        let allMakes = getMakes( data )
+        let allYears = getYears( data )
+        let maxPrice = getMaxPrice( data )
+
+        stats.push(allMakes, allYears, maxPrice)
+        return stats
+    
+    } catch {
+        return 'Error extracting data.'
+    }
 }
 
-console.log( getModels(data, 'Ferrari') )
-console.log( getMakes(data) )
+export default dataExtractor
+
