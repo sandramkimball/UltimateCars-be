@@ -42,7 +42,7 @@ router.get('/find_by/:id', (req, res) => {
 // GET CAR STATISTICS
 router.get('/statistics', (req, res) => {
     let vehicles = Vehicle.find().exec()
-    let stats = dataExtractor( vehicles )
+    let stats = dataExtractor( vehicles.data )
 
     try { 
         res.json({ data: stats })
