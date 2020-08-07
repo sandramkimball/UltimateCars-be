@@ -1,5 +1,5 @@
 
-const dataExtractor = (data) => {
+export const dataExtractor = (data) => {
     let stats = []
 
     // Callback Func - creates array of model objects: { 'GR Supra' : 7 } 
@@ -74,13 +74,14 @@ const dataExtractor = (data) => {
         let allYears = getYears( data )
         let maxPrice = getMaxPrice( data )
 
-        stats.push(allMakes, allYears, maxPrice)
+        stats.push( allMakes)
+        stats.push( allYears )
+        stats.push ( maxPrice)
         return stats
     
     } catch {
-        return 'Error extracting data.'
+        throw new Error( 'Error extracting data.' )
     }
 }
 
-export default dataExtractor
 

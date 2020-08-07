@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var dataExtractor = require('../models/dataExtractor')
+var { dataExtractor } = require('../models/dataExtractor')
 
 var Vehicle = require('../models/Vehicles');
 
