@@ -1,5 +1,5 @@
 
-export const dataExtractor = (data) => {
+const dataExtractor = (data) => {
     let stats = []
 
     // Callback Func - creates array of model objects: { 'GR Supra' : 7 } 
