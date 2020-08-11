@@ -13,6 +13,7 @@ var indexRouter = require('./routes/index')
 var authRouter = require('./routes/auth')
 var vehiclesRouter = require('./routes/vehicles')
 var imagesRouter = require('./routes/images')
+var dataRouter = require('./routes/data')
 
 // Init app
 var app = express()
@@ -29,6 +30,7 @@ app.use('/', indexRouter)
 app.use('/auth', authRouter)
 app.use('/vehicles', vehiclesRouter)
 app.use('/images', imagesRouter)
+app.use('/data', dataRouter)
 
 
 // DB Connect

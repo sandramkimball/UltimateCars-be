@@ -1,5 +1,5 @@
 
-const dataExtractor = (data) => {
+module.exports = function dataExtractor(data) {
     let stats = []
 
     // Callback Func - creates array of model objects: { 'GR Supra' : 7 } 
@@ -87,5 +87,6 @@ const dataExtractor = (data) => {
         
     return stats
 }
+
 
 

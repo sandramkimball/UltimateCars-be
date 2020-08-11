@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var { dataExtractor } = require('../models/dataExtractor')
 
 var Vehicle = require('../models/Vehicles');
 
@@ -19,7 +18,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     Vehicle.findOne({ _id: req.body.id })
     .then(vehicle => {
-        res.json({message: `Panda #${req.body._id}`, data: vehicle})
+        res.json({message: `Car #${req.body._id}`, data: vehicle})
     })
     .catch( err => {
         res.json({message: 'Vehicle not found.', data: err})
@@ -39,18 +38,6 @@ router.get('/find_by/:id', (req, res) => {
     })
 })
 
-
-// GET CAR STATISTICS
-router.get('/stats', (req, res) => {
-    let cars = Vehicle.find().exec()
-    let stats = dataExtractor( cars )
-
-    try { 
-        res.json({ message: 'CAR STATS', data: stats })
-    } catch ( err ) {
-        res.json({message: 'Function error getting statistics.', data: err})
-    }
-})
 
 // POST A NEW CAR
 router.post('/', (req, res) => {
