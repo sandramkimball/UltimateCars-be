@@ -17,9 +17,9 @@ router.get('/', (req, res) => {
 
 // GET CAR BY ID
 router.get('/:id', (req, res) => {
-    Vehicle.find({id: req.body._id})
+    Vehicle.findOne({ _id: req.body.id })
     .then(vehicle => {
-        res.json({data: vehicle})
+        res.json({message: `CAR FOUND #${req.body._id}`, data: vehicle})
     })
     .catch( err => {
         res.json({message: 'Vehicle not found.', data: err})
@@ -39,13 +39,14 @@ router.get('/find_by/:id', (req, res) => {
     })
 })
 
+
 // GET CAR STATISTICS
-router.get('/statistics', (req, res) => {
-    let vehicles = Vehicle.find().exec()
-    let stats = dataExtractor( vehicles.data )
+router.get('/stats', (req, res) => {
+    let cars = Vehicle.find().exec()
+    let stats = dataExtractor( cars )
 
     try { 
-        res.json({ data: stats })
+        res.json({ message: 'CAR STATS', data: stats })
     } catch ( err ) {
         res.json({message: 'Function error getting statistics.', data: err})
     }

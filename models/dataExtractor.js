@@ -46,6 +46,7 @@ const dataExtractor = (data) => {
     const getYears = ( data ) => {
         let allYears = [];
 
+        // each obj in arr
         for ( k in data){
             let car = data[k] 
             if(!allYears.includes(car['year'])){
@@ -76,7 +77,7 @@ const dataExtractor = (data) => {
 
         // stats.push( allMakes)
         stats.push( allYears )
-        stats.push ( maxPrice)
+        stats.push( maxPrice )
     
     } catch {
         throw new Error( 'Error extracting data.' )
