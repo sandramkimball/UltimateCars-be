@@ -74,8 +74,10 @@ const dataExtractor = (data) => {
         // let allMakes = getMakes( data )
         let allYears = getYears( data )
         let maxPrice = getMaxPrice( data )
+        let allMakes = getMakes( data )
 
         // stats.push( allMakes)
+        stats.push( allMakes )
         stats.push( allYears )
         stats.push( maxPrice )
     

@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     Vehicle.findOne({ _id: req.body.id })
     .then(vehicle => {
-        res.json({message: `CAR FOUND #${req.body._id}`, data: vehicle})
+        res.json({message: `Panda #${req.body._id}`, data: vehicle})
     })
     .catch( err => {
         res.json({message: 'Vehicle not found.', data: err})
