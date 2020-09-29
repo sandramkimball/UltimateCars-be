@@ -10,7 +10,7 @@ module.exports = function dataExtractor(data) {
         let allModels = [];
         for ( k in data ){      
             var car = data[k] // data[0] = {'make': 'Mazda', 'model': 'M3'}
-            if( car['make'] === make && !allModels.has(car['model']) ){
+            if( car['make'] === make && !allModels.includes(car['model']) ){
                 allModels.push(car['model'])
             }     
         }
@@ -28,7 +28,7 @@ module.exports = function dataExtractor(data) {
             var make = car['make']
 
             // If car make is not in allMakes:
-            if ( !allMakes.has( make ) ){           
+            if ( !allMakes.has( make ) ){     // .has() only works on Map()       
                 // Create and add new object {'make', [models]}
                 allMakes.set( make, getModelsForEachMake(data, make) ) 
             }
