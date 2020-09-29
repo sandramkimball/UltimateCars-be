@@ -2,44 +2,38 @@
 module.exports = function dataExtractor(data) {
     let stats = []
 
-    // Callback Func - creates array of model objects: { 'GR Supra' : 7 } 
-    const getModels = ( data, make ) => {
-        let allModels = new Map()
-
+    /* Callback Func: This returns an array of all models belonging to a car make.
+    [ 'M3', 'Miata', 'Super20' ]
+    The function is called in getMakes() and the array is stored as a value in an object.
+    No need to create a dictionary because getMakes() contains the dictionary. */
+    const getModelsForEachMake = ( data, make ) => {
+        let allModels = [];
         for ( k in data ){      
-            var car = data[k]     
-            var model = car['model']
-            if( car['make'] === make ){
-                if ( !allModels.has( model ) ){
-                    allModels.set( model, 1 )
-                } else {
-                    // Create temporary value, replace object.
-                    var v = allModels.get( model )
-                    allModels.delete( model )
-                    allModels.set( model, v+1 )
-                }       
+            var car = data[k] // data[0] = {'make': 'Mazda', 'model': 'M3'}
+            if( car['make'] === make && !allModels.has(car['model']) ){
+                allModels.push(car['model'])
             }     
         }
-
-        allModels = Array.from(allModels, ([name, value]) => ({ name, value }))
+        
         return allModels
     };
 
-    // Create array of make objects: { key: make, value: [array of model objs] }
+    // Create array of objects based on each make: 
+    // [ {'Make':'Mazda', 'Models':['M3', 'Miata', 'Super20']}, {...}, {...} ]
     const getMakes = ( data ) => {
-        let allMakes = new Map()
+        let allMakes = new Map();
 
         for ( k in data ){
-            let car = data[k]
+            let car = data[k] // data[1] = {make: 'Dodge'...} 
             var make = car['make']
 
-            // If car make is not in arr, add key and value (array of matching models).
+            // If car make is not in arr, add key:value (array of matching models).
             if ( !allMakes.has( make ) ){           
-                allMakes.set( make, getModels(data, make) )
+                allMakes.set( make, getModelsForEachMake(data, make) )
             }
         }
 
-        allMakes = Array.from(allMakes, ([name, value]) => ({ name, value }))
+        allMakes = Array.from(allMakes, ([make, model]) => ({ make, model }))
         return allMakes
     };
 
