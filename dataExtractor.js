@@ -24,16 +24,17 @@ module.exports = function dataExtractor(data) {
         let allMakes = new Map();
 
         for ( k in data ){
-            let car = data[k] // data[1] = {make: 'Dodge'...} 
+            let car = data[k] // data[1] = {make: 'Dodge', model: 'Viper', ...} 
             var make = car['make']
 
-            // If car make is not in arr, add key:value (array of matching models).
+            // If car make is not in allMakes:
             if ( !allMakes.has( make ) ){           
-                allMakes.set( make, getModelsForEachMake(data, make) )
+                // Create and add new object {'make', [models]}
+                allMakes.set( make, getModelsForEachMake(data, make) ) 
             }
         }
 
-        allMakes = Array.from(allMakes, ([make, model]) => ({ make, model }))
+        allMakes = Array.from( allMakes )
         return allMakes
     };
 
